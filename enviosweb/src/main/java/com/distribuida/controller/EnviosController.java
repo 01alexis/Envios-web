@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,32 +36,37 @@ public class EnviosController {
     }
 
     @GetMapping("/findOne")
-    public String findOne(@RequestParam(value = "idEnvios", required = false) Integer idEnvio, ModelMap modelMap) {
+    public String findOne(@RequestParam(value = "idEnvios", required = false) Integer idEnvio,
+    		@RequestParam("opcion")@Nullable Integer opcion,
+    		ModelMap modelMap) {
         if (idEnvio != null) {
-            try {
+           // try {
                 Envios envio = enviosDAO.findOne(idEnvio);
                 modelMap.addAttribute("envio", envio);
-            } catch (Exception e) {
-                modelMap.addAttribute("error", "No se pudo encontrar el envío: " + e.getMessage());
-            }
+            //} catch (Exception e) {
+           //     modelMap.addAttribute("error", "No se pudo encontrar el envío: " + e.getMessage());
+           // }
         }
-        return "ver-envio"; 
+        if(opcion == 1) return "add-envios";  //Actualizacion 
+		else return "del-envios";             //Eliminación
+		
     }
 
     @PostMapping("/add")
     @Transactional
     public String add(@RequestParam(value = "idEnvio", required = false) Integer idEnvio,
-                      @RequestParam(value = "fechaEnvio", required = false) Date fechaEnvio,
+    		          @RequestParam ("FechaEnvio") @Nullable Date FechaEnvio,
+                    
                       @RequestParam("idPedido") int idPedido,
                       @RequestParam("idSucursalOrigen") int idSucursalOrigen,
                       @RequestParam("idSucursalDestino") int idSucursalDestino,
                       ModelMap modelMap) {
         
-        try {
+       // try {
             Envios envio;
             if (idEnvio == null) {
                 envio = new Envios();
-                envio.setFechaEnvio(fechaEnvio);
+                envio.setFechaEnvio(FechaEnvio);
                 envio.setIdPedido(idPedido);
                 envio.setIdSucursalOrigen(idSucursalOrigen);
                 envio.setIdSucursalDestino(idSucursalDestino);
@@ -68,16 +74,16 @@ public class EnviosController {
             } else {
                 envio = enviosDAO.findOne(idEnvio);
                 if (envio != null) {
-                    envio.setFechaEnvio(fechaEnvio);
+                    envio.setFechaEnvio(FechaEnvio);
                     envio.setIdPedido(idPedido);
                     envio.setIdSucursalOrigen(idSucursalOrigen);
                     envio.setIdSucursalDestino(idSucursalDestino);
                     enviosDAO.up(envio);
                 }
             }
-        } catch (Exception e) {
-            modelMap.addAttribute("error", "Error al guardar el envío: " + e.getMessage());
-        }
+       // } catch (Exception e) {
+         //   modelMap.addAttribute("error", "Error al guardar el envío: " + e.getMessage());
+        //}
 
         return "redirect:/envios/findAll"; 
     }
@@ -85,11 +91,11 @@ public class EnviosController {
     @GetMapping("/del")
     public String del(@RequestParam(value = "idEnvio") Integer idEnvio) {
         if (idEnvio != null) {
-            try {
+           // try {
                 enviosDAO.del(idEnvio);
-            } catch (Exception e) {
+           // } catch (Exception e) {
                 
-            }
+         //   }
         }
         return "redirect:/envios/findAll"; 
     }

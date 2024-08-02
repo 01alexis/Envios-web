@@ -11,18 +11,19 @@
 
          <form action="add" method="post">
          
-               <input type="hidden" id="idenvios" name="idenvios" value="${envios.idEnvios}" />
+               <input type="hidden" id="idenvios" name="idenvios" value="${envios.idEnvios}" /><br/>
                FechaEnvio
                <input type="Date" id="fechaEnvio" name="fechaEnvio" value="${envios.fechaEnvio}" />
                <br/>
                idPedido
-               <input type="hidden" id="idPedido" name="idPedido" value="${envios.idPedido}" />
+               <input type="text" id="idPedido" name="idPedido" value="${envios.idPedido}" />
+
                <br/>
-               idSucursalorigen
-               <input type="hidden" id="idSucursalOrigen" name="idSucursalOrigen" value="${envios.idSucursalOrigen}" />
+               idSucursalOrigen
+               <input type="text" id="idSucursalOrigen" name="idSucursalOrigen" value="${envios.idSucursalOrigen}" />
                <br/>
                IdSucursalDestino
-               <input type="hidden" id="idSucursalDestino" name="idSucursalDestino" value="${cliente.idSucursalDestino}" />
+               <input type="text" id="idSucursalDestino" name="idSucursalDestino" value="${envios.idSucursalDestino}" />
                <br/>
                <button type="submit">Guardar</button>
                
