@@ -49,16 +49,17 @@ public class Envios {
 	
 	
 public Envios () {}
-	public Envios(int idEnvios, Date fechaEnvio ) {
-		
+
+	public Envios(int idEnvios, Date fechaEnvio, int idPedido, int idSucursalOrigen, int idSucursalDestino) {
 		this.idEnvios = idEnvios;
 		this.fechaEnvio = fechaEnvio;
+		this.idPedido = idPedido;
+		this.idSucursalOrigen = idSucursalOrigen;
+		this.idSucursalDestino = idSucursalDestino;
 		//this.pedido = pedido;
 		//this.sucursalorigen = sucursalorigen;
 		//this.sucursaldestino = sucursaldestino;
 	}
-
-
 
 
 	//public Pedido getPedido() {
@@ -103,6 +104,7 @@ public Envios () {}
 
 
 
+	
 	public int getIdEnvios() {
 		return idEnvios;
 	}
