@@ -86,7 +86,7 @@
     </style>
 </head>
 <body>
-    <h1>Agregar Datos</h1>
+    <h1>Agregar Datos1	</h1>
 
     <form action="add" method="post">
         <input type="hidden" id="idenvios" name="idenvios" value="${envios.idEnvios}" />
